@@ -1,17 +1,17 @@
-package org.acme.dto;
+package org.acme.domain.dto.request;
 
 import java.util.Map;
 
 
-public class CelcoinPixQrCodeDto {
+public class CelcoinPixQrCodeRequestDTO {
 
     private Map<String, Object> body;
 
-    public CelcoinPixQrCodeDto(Map<String, Object> body) {
+    public CelcoinPixQrCodeRequestDTO(Map<String, Object> body) {
         this.body = body;
     }
 
-    public CelcoinPixQrCodeDto() {
+    public CelcoinPixQrCodeRequestDTO() {
     }
 
     public Map<String, Object> getBody() {

@@ -1,4 +1,4 @@
-package org.acme;
+package org.acme.infra.quarkus;
 
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
@@ -6,7 +6,7 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
 @Path("/hello")
-public class GreetingResource {
+public class Main {
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
