@@ -1,4 +1,4 @@
-package org.acme.domain.dto.request;
+package org.acme.presentation.client.celcoin.dto.request;
 
 import java.util.Map;
 

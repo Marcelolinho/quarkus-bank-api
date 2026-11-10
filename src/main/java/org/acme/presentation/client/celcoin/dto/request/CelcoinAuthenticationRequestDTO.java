@@ -1,9 +1,14 @@
-package org.acme.domain.dto.request;
+package org.acme.presentation.client.celcoin.dto.request;
+
+import jakarta.ws.rs.FormParam;
 
 public class CelcoinAuthenticationRequestDTO {
 
+    @FormParam("client_id")
     private String clientId;
+    @FormParam("grant_type")
     private String grantType;
+    @FormParam("client_secret")
     private String clientSecret;
 
     public CelcoinAuthenticationRequestDTO(String clientId, String grantType, String clientSecret) {

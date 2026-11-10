@@ -1,4 +1,6 @@
-package org.acme.domain.dto.response;
+package org.acme.presentation.client.celcoin.dto.response;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.Instant;
 import java.util.Date;
@@ -9,7 +11,7 @@ public class CelcoinAuthenticationResponseDTO {
     private Integer expiresIn;
     private Date tokenExpirationDate;
 
-    public CelcoinAuthenticationResponseDTO(String accessToken, String tokenType, Integer expiresIn) {
+    public CelcoinAuthenticationResponseDTO(@JsonProperty("access_token") String accessToken, @JsonProperty("token_type") String tokenType, @JsonProperty("expires_in") Integer expiresIn) {
         this.accessToken = accessToken;
         this.tokenType = tokenType;
         this.expiresIn = expiresIn;

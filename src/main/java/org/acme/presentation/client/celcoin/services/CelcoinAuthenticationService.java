@@ -1,16 +1,17 @@
-package org.acme.domain.usecases;
+package org.acme.presentation.client.celcoin.services;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import org.acme.infra.client.CelcoinClient;
-import org.acme.domain.dto.request.CelcoinAuthenticationRequestDTO;
-import org.acme.domain.dto.response.CelcoinAuthenticationResponseDTO;
+import org.eclipse.microprofile.rest.client.inject.RestClient;
+import org.acme.presentation.client.celcoin.CelcoinClient;
+import org.acme.presentation.client.celcoin.dto.request.CelcoinAuthenticationRequestDTO;
+import org.acme.presentation.client.celcoin.dto.response.CelcoinAuthenticationResponseDTO;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import java.util.Date;
 
 @ApplicationScoped
-public class CelcoinAuthentication {
+public class CelcoinAuthenticationService {
 
     private CelcoinAuthenticationResponseDTO celcoinAccess;
 
@@ -21,10 +22,11 @@ public class CelcoinAuthentication {
     String celcoinClientSecret;
 
     @Inject
+    @RestClient
     CelcoinClient celcoinClient;
 
     public String getToken() {
-        if (getCelcoinAccess() != null && celcoinAccess.getTokenExpirationDate().before(new Date())) {
+        if (getCelcoinAccess() != null && celcoinAccess.getTokenExpirationDate().after(new Date())) {
             return celcoinAccess.getAccessToken();
         }
 
