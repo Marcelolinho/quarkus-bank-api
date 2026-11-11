@@ -1,5 +1,7 @@
 package org.acme.domain.bo;
 
+import org.acme.domain.exception.ApiException;
+
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -43,7 +45,7 @@ public class StaticPixQRCodeBO {
 
         for (Map.Entry<String, Object> entry : requiredAttributes.entrySet()) {
             if (entry.getValue() == null) {
-                throw new RuntimeException(String.format("O valor de %s não deve ser nulo", entry.getKey()));
+                throw new ApiException(400, String.format("O valor de %s não deve ser nulo", entry.getKey()));
             }
         }
     }

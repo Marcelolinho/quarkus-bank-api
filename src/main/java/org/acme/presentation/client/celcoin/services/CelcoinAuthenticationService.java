@@ -3,6 +3,7 @@ package org.acme.presentation.client.celcoin.services;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
+import org.acme.domain.exception.ApiException;
 import org.acme.presentation.client.celcoin.CelcoinClient;
 import org.acme.presentation.client.celcoin.dto.request.CelcoinAuthenticationRequestDTO;
 import org.acme.presentation.client.celcoin.dto.response.CelcoinAuthenticationResponseDTO;
@@ -31,6 +32,7 @@ public class CelcoinAuthenticationService {
         }
 
         CelcoinAuthenticationResponseDTO response = authenticate();
+        response.setAccessToken(String.format("Bearer %s", response.getAccessToken()));
         setCelcoinAccess(response);
         return response.getAccessToken();
     }
@@ -41,7 +43,7 @@ public class CelcoinAuthenticationService {
         try {
             return celcoinClient.authenticate(requestBody);
         } catch(Exception e) {
-            throw new RuntimeException("Couldn't authenticate to Celcoin.");
+            throw new ApiException(502, "Couldn't authenticate to Celcoin.");
         }
     }
 

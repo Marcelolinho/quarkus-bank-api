@@ -5,12 +5,17 @@ import jakarta.inject.Inject;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 import jakarta.transaction.Transactional;
 import org.acme.domain.bo.StaticPixQRCodeBO;
+import org.acme.domain.dto.request.PixKeyRequestDTO;
 import org.acme.domain.dto.request.StaticPixQRCodeRequestDTO;
+import org.acme.domain.dto.response.PixKeyResponseDTO;
 import org.acme.domain.dto.response.StaticPixQRCodeResponseDTO;
+import org.acme.domain.mapper.PixKeyMapper;
 import org.acme.domain.mapper.StaticPixQRCodeMapper;
 import org.acme.domain.usecases.CreateStaticQRCode;
 import org.acme.presentation.client.celcoin.CelcoinClient;
+import org.acme.presentation.client.celcoin.dto.response.CelcoinPixKeyResponseDTO;
 import org.acme.presentation.client.celcoin.services.CelcoinAuthenticationService;
+import org.acme.presentation.client.celcoin.services.CelcoinCheckPixKeyService;
 
 @ApplicationScoped
 public class PixService {
@@ -29,5 +34,12 @@ public class PixService {
         StaticPixQRCodeBO response = createStaticQRCodeUseCase.createPixPayment(dto);
 
         return StaticPixQRCodeMapper.toResponseDTO(response);
+    }
+
+    public PixKeyResponseDTO consultPixKey(String account, PixKeyRequestDTO dto) {
+        CelcoinPixKeyResponseDTO response = new CelcoinCheckPixKeyService(celcoinAuthentication, celcoinClient)
+                .checkPixKey(account, dto);
+
+        return PixKeyMapper.celcoinToResponseDTO(response);
     }
 }

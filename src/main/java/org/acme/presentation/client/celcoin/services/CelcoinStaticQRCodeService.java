@@ -18,6 +18,6 @@ public class CelcoinStaticQRCodeService {
 
     public CelcoinStaticQRCodeResponseDTO createQRCode(StaticPixQRCodeRequestDTO dto) {
         CelcoinStaticQRCodeRequestDTO requestDTO = StaticPixQRCodeMapper.dtoToCelcoinRequestDTO(dto);
-        return celcoinClient.createQrCodeByPixKey("Bearer " + authenticationService.getToken(), requestDTO);
+        return celcoinClient.createQrCodeByPixKey(authenticationService.getToken(), requestDTO);
     }
 }

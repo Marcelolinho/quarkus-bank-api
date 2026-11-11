@@ -1,5 +1,7 @@
 package org.acme.domain.bo;
 
+import org.acme.domain.exception.ApiException;
+
 import io.netty.util.internal.StringUtil;
 
 import java.util.*;
@@ -35,7 +37,7 @@ public class StaticPixQRCodeMerchantBO {
 
         for (Map.Entry<String, String> obj : attributes.entrySet()) {
             if (StringUtil.isNullOrEmpty(obj.getValue())) {
-                throw new RuntimeException(String.format("O campo %s não pode ser nulo ou vazio", obj.getKey()));
+                throw new ApiException(400, String.format("O campo %s não pode ser nulo ou vazio", obj.getKey()));
             }
         }
     }
